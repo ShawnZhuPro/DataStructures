@@ -42,17 +42,17 @@ public class DriverHashmaps {
 		//which should be outside the src folder
 				
 		
-		try {
-			Scanner scanner = new Scanner(new File("covid417.csv"));
-			
-			while(scanner.hasNext()) {
+//		try {
+//			Scanner scanner = new Scanner(new File("covid417.csv"));
+//			
+//			while(scanner.hasNext()) {
 //				System.out.println(scanner.next());
-			}
-			
-			scanner.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//			}
+//			
+//			scanner.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 //		HashMap states = new HashMap<String, ArrayList<String>>();
 //		HashMap map = new HashMap<String, states>();
@@ -78,7 +78,7 @@ public class DriverHashmaps {
 				map.put(cityName, states);
 
 			}
-//			System.out.println(map.get("Yuma"));
+			System.out.println(map.get("Yuma").get(""));
 			scanner.close();
 			
 			
