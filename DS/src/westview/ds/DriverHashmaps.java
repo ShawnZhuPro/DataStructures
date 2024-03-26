@@ -46,7 +46,7 @@ public class DriverHashmaps {
 			Scanner scanner = new Scanner(new File("covid417.csv"));
 			
 			while(scanner.hasNext()) {
-				System.out.println(scanner.next());
+//				System.out.println(scanner.next());
 			}
 			
 			scanner.close();
@@ -54,7 +54,13 @@ public class DriverHashmaps {
 			e.printStackTrace();
 		}
 		
-		HashMap map = new HashMap<String, ArrayList<String>>();
+//		HashMap states = new HashMap<String, ArrayList<String>>();
+//		HashMap map = new HashMap<String, states>();
+		
+		HashMap states = new HashMap<String, ArrayList<String>>();
+		HashMap map = new HashMap<String, HashMap<String, ArrayList<String>>>();
+
+
 		
 		try {
 			Scanner scanner = new Scanner(new File("covid417.csv"));
@@ -68,11 +74,13 @@ public class DriverHashmaps {
 				list.add(row[3]);  // deaths
 				list.add(row[4]);  // recovered
 				list.add(row[5]);  // active
-				map.put(cityName, list);
+				states.put(stateName, list);
+				map.put(cityName, states);
 
 			}
-			System.out.println(map);
+//			System.out.println(map.get("Yuma"));
 			scanner.close();
+			
 			
 			// User input ---------------------------------------------------
 			while(true) {
