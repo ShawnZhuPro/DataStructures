@@ -70,9 +70,8 @@ public class DriverHashmaps {
 	//				list.add(row[4]);  // recovered
 	//				list.add(row[5]);  // active
 					
-					if(!row[2].substring(0).equals("Confirmed")) {
+					if(row[2].substring(0).equals("Confirmed")) {
 						stateTotals.put(stateName, Integer.parseInt(row[2]));
-
 					}
 					states.put(stateName, list);
 					map.put(cityName, states);
