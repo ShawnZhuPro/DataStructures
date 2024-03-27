@@ -1,6 +1,7 @@
 package westview.ds;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -43,49 +44,71 @@ public class DriverHashmaps {
 		
 		// Data for everything with the city name as the key
 		HashMap map = new HashMap<String, HashMap<String, ArrayList<String>>>();
+		HashMap stateTotals = new HashMap<String, Integer>();
 
-		try {
-			Scanner scanner = new Scanner(new File("covid417.csv"));
+		while(true) {
 			
-			while(scanner.hasNextLine()) {
-				// Data for the current state in the current line
-				HashMap states = new HashMap<String, ArrayList<String>>();
+		
+			try {
+				Scanner scanner = new Scanner(new File("covid417.csv"));
+				while(scanner.hasNextLine()) {
+					// Data for the current state in the current line
+					HashMap states = new HashMap<String, ArrayList<String>>();
+	
+					// Splits data for CSVs (using commas)
+					String[] row = scanner.nextLine().split(",");
+					String cityName = row[0].toLowerCase();
+					String stateName = row[1].toLowerCase();
 
-				// Splits data for CSVs (using commas)
-				String[] row = scanner.nextLine().split(",");
-				String cityName = row[0];
-				String stateName = row[1];
-				ArrayList<String> list = new ArrayList<String>();
-				list.add(row[2]);  // confirmed
-//				list.add(row[3]);  // deaths
-//				list.add(row[4]);  // recovered
-//				list.add(row[5]);  // active
+					
 
-				states.put(stateName, list);
-				map.put(cityName, states);
+					
+					
+					ArrayList<String> list = new ArrayList<String>();
+					list.add(row[2]);  // confirmed
+	//				list.add(row[3]);  // deaths
+	//				list.add(row[4]);  // recovered
+	//				list.add(row[5]);  // active
+					
+					stateTotals.put(stateName, Integer.parseInt(row[2]));
+					states.put(stateName, list);
+					map.put(cityName, states);
+	
+				}
+				System.out.println(stateTotals);
+				scanner.close();
+				
+				
+				// User input ---------------------------------------------------
+				while(true) {
+					Scanner userInput = new Scanner(System.in);
+					System.out.println("Please enter a State");
+					
+					String stateSelected = userInput.nextLine().trim().toLowerCase();
+					int total = 0;
+					
+	
+					
+					System.out.println(stateSelected + " state confirmed total is: " + stateTotals.get(stateSelected) +
+							". \n Please enter a city:\n");
+					
+					String citySelected = userInput.nextLine().trim().toLowerCase();
+	
+					
+					System.out.println("The confirmed number of cases in " + citySelected + ", " +
+							stateSelected + " is : " + ((HashMap) map.get(citySelected)).get(stateSelected));
+					
+				}
+				// --------------------------------------------------------------
+				
+			} catch (Exception e) {
+//				System.out.println("Please enter a valid city and state name!");
 
+
+				
+				e.printStackTrace();
+				
 			}
-			scanner.close();
-			
-			// User input ---------------------------------------------------
-			while(true) {
-				Scanner userInput = new Scanner(System.in);
-				System.out.println("Please enter a State");
-				
-				String stateSelected = userInput.nextLine();
-				
-				System.out.println(stateSelected + " state confirmed total is: " + "total here " +
-						". \n Please enter a city:\n");
-				
-				String citySelected = userInput.nextLine();
-				System.out.println("The confirmed number of cases in " + citySelected + ", " +
-						stateSelected + " is : " + ((HashMap) map.get(citySelected)).get(stateSelected));
-				
-			}
-			// --------------------------------------------------------------
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 
